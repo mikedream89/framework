@@ -29,7 +29,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,6 +134,10 @@ public class OForm extends LinearLayout {
         return mRecord;
     }
 
+    public void setData(ODataRow record) {
+        initForm(record);
+    }
+
     public void initForm(ODataRow record) {
         mRecord = new ODataRow();
         mRecord = record;
@@ -173,8 +176,9 @@ public class OForm extends LinearLayout {
                 c.initControl();
                 Object val = c.getValue();
                 if (mRecord != null) {
-                    if (mRecord.contains(c.getFieldName()))
+                    if (mRecord.contains(c.getFieldName())) {
                         val = mRecord.get(c.getFieldName());
+                    }
                 }
                 if (val != null)
                     c.setValue(val);
